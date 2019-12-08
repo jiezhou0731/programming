@@ -35,10 +35,8 @@ void calc(long long p, long long last) {
             f[p][2] = max(f[p][2], f[next][2]);
         }
     }
-    //printf("p: %lld last: %lld, 0: %lld  1: %lld  2:%lld\n", p, last, f[p][0], f[p][1], f[p][2]);
 }
 void solve(long long p, long long last, long long pre) {
-    //printf("p: %lld pre %lld \n", p, pre);
  
     long long t = max(a[p],pre);
     if (last != 0) {
@@ -53,7 +51,6 @@ void solve(long long p, long long last, long long pre) {
             t = max(t, f[next][1]);
         }
     }
-    //printf("* %lld *\n", t);
     ans = min(ans, t);
     for (long long next: edges[p]) {
         if (next != last) {
@@ -63,7 +60,6 @@ void solve(long long p, long long last, long long pre) {
                 nextPre = max(nextPre, *prev(child.end()));
             }
             child.insert(f[next][2]);
-            //printf("-- next: %lld nextpre %lld \n", next, nextPre);
             solve(next, p, nextPre);
         }
     }
