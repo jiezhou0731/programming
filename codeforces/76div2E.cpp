@@ -46,7 +46,6 @@ int main()
                     f[i][j] = min(f[i-1][2], min(f[i-1][0], f[i-1][1])) + 1;
                 }
             }
-            printf("f[%d][%d] = %d\n", i, j, f[i][j]);
         }
     }
     int ans = M;
