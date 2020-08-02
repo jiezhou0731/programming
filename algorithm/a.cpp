@@ -12,90 +12,50 @@ using namespace __gnu_cxx;
  
 // less_equal if supports multiple items
 // order_of_key() find_by_order()
-typedef tree<long long, null_type, less_equal<long long>, rb_tree_tag, 
+typedef tree<long long, null_type, less<long long>, rb_tree_tag, 
              tree_order_statistics_node_update> 
     dataSet; 
 //const long long MOD = 100000000007;
 const long long INF = pow(2, 25);
-const long long M = 10000100;
+const long long M = 200100;
 ll t,tt, n, m,x,y,q,l,r;
-string s;
-bool isNotPrime[M + 100];
-vector<ll> prime;
-void calcPrime(long long m) {
-    memset(isNotPrime, 0, sizeof(isNotPrime));
-    for (int i = 2; i <= m; i++) {
-        if (isNotPrime[i] == false) {
-            prime.push_back(i);
-            ll x = i + i;
-            while (x <= m) {
-                isNotPrime[x] = true;
-                x+=i;
-            }
-        }
-    } 
-}
-//https://codeforces.com/problemset/problem/222/C
+dataSet has;
+int b[M];
+int ans;
+//https://codeforces.com/problemset/problem/1172/A
 int main() {
-    calcPrime(M);
-    cin >> n >> m;
-    map<int,int> f;
+    cin >> n;
     for (int i = 0; i < n; i++) {
         cin >> x;
-        for (auto j: prime) {
-            while (x != 0 && x % j == 0) {
-                f[j] ++;
-                x /= j;
-            }
-        }
+        has.insert(x);
     }
-    for (int i = 0; i < m; i++) {
+    ans = 0;
+    int suf = -1;
+    int sufCnt = 0;
+    int i;
+    for (i = 0; i < n; i++) {
+        if (has.order_of_key(n - i) >= n - i) {
+            ans += n;
+            break;
+        }
+
         cin >> x;
-        for (auto j: prime) {
-            while (x != 0 && x % j == 0) {
-                f[j] --;
-                x /= j;
+        if (x == 0 || x == 1) {
+            suf = x;
+            sufCnt = 1;
+        }
+        if (suf > 0) {
+            if (x == suf + 1) {
+                suf ++;
+                sufCnt ++;
+            } else {
+                suf = -1;
+                sufCnt = 0;
             }
         }
     }
-    vector<ll> ans0, ans1;
-    ll current = 1;
-    for (auto i: f) {
-        if (i.second > 0) {
-            //cout << "(" << i.first <<" " << i.second <<")";
-            for (int j = 0; j < i.second; j++) {
-                if (current * i.first < 10000000) {
-                    current *= i.first;
-                } else {
-                    ans0.push_back(current);
-                    current = i.first;
-                }
-            }
-        }
-    }
-    ans0.push_back(current);
-    current = 1;
-    for (auto i: f) {
-        if (i.second < 0) {
-            //cout << "(" << i.first <<" " << i.second <<")";
-            for (int j = 0; j < -i.second; j++) {
-                if (current * i.first < 10000000) {
-                    current *= i.first;
-                } else {
-                    ans1.push_back(current);
-                    current = i.first;
-                }
-            }
-        }
-    }
-    ans1.push_back(current);
-    cout << ans0.size() << " " << ans1.size() << "\n";
-    for (auto i: ans0) {
-        cout << i <<" ";
-    }
-    cout <<"\n";
-    for (auto i: ans1) {
-        cout << i <<" ";
-    }
+    cout << i <<" +"<< n <<"-" << sufCnt;
+
+
     return 0;
 }
