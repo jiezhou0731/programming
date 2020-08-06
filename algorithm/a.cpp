@@ -17,45 +17,30 @@ typedef tree<long long, null_type, less<long long>, rb_tree_tag,
     dataSet; 
 //const long long MOD = 100000000007;
 const long long INF = pow(2, 25);
-const long long M = 200100;
-ll t,tt, n, m,x,y,q,l,r;
-dataSet has;
-int b[M];
-int ans;
-//https://codeforces.com/problemset/problem/1172/A
+const long long M = 400000;
+const ll MOD = 998244353;
+ll t,tt, n, m,x,y,q,l;
+ll a[M];
+ll countDigits(ll x) {
+    ll ans = 0;
+    while (x != 0) {
+        ans ++;
+        x /= 10;
+    }
+    return ans;
+}
+ll cnt[20];
+//https://codeforces.com/problemset/problem/1195/D2
 int main() {
+    memset(cnt, 0, sizeof(cnt));
     cin >> n;
     for (int i = 0; i < n; i++) {
-        cin >> x;
-        has.insert(x);
+        cin >> a[i];
+        cnt[countDigits(a[i])] ++;
     }
-    ans = 0;
-    int suf = -1;
-    int sufCnt = 0;
-    int i;
-    for (i = 0; i < n; i++) {
-        if (has.order_of_key(n - i) >= n - i) {
-            ans += n;
-            break;
-        }
+    for (int i = 0; i < n ;i++) {
 
-        cin >> x;
-        if (x == 0 || x == 1) {
-            suf = x;
-            sufCnt = 1;
-        }
-        if (suf > 0) {
-            if (x == suf + 1) {
-                suf ++;
-                sufCnt ++;
-            } else {
-                suf = -1;
-                sufCnt = 0;
-            }
-        }
     }
-    cout << i <<" +"<< n <<"-" << sufCnt;
 
-
-    return 0;
 }
+
