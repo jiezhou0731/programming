@@ -12,35 +12,44 @@ using namespace __gnu_cxx;
  
 // less_equal if supports multiple items
 // order_of_key() find_by_order()
-typedef tree<long long, null_type, less<long long>, rb_tree_tag, 
+typedef tree<long long, null_type, less_equal<long long>, rb_tree_tag, 
              tree_order_statistics_node_update> 
     dataSet; 
 //const long long MOD = 100000000007;
 const long long INF = pow(2, 25);
-const long long M = 400000;
+const long long M = pow(10,6);
 const ll MOD = 998244353;
-ll t,tt, n, m,x,y,q,l;
-ll a[M];
-ll countDigits(ll x) {
-    ll ans = 0;
-    while (x != 0) {
-        ans ++;
-        x /= 10;
-    }
-    return ans;
-}
-ll cnt[20];
-//https://codeforces.com/problemset/problem/1195/D2
+
+long long cost = 0;
+long long n, m, k, d, f, t, c, dmax;
+vector<tuple<ll,ll,ll,ll>> a;
 int main() {
-    memset(cnt, 0, sizeof(cnt));
-    cin >> n;
-    for (int i = 0; i < n; i++) {
-        cin >> a[i];
-        cnt[countDigits(a[i])] ++;
+    scanf("%lld %lld %lld", &n, &m, &k);
+    dmax = 0;
+    for (int i = 0; i < m ;i++) {
+        scanf("%lld %lld %lld %lld",&d, &f, &t, &c);
+        dmax = max(d, dmax);
+        a.push_back(d,f,t,c);
     }
-    for (int i = 0; i < n ;i++) {
+    sort(a.begin(), a.end());
+    ll ans = -1;
+    ll enterCnt = 0;
+    ll enterCost = 0;
+    multiset<ll> enter[M];
+    ll backCnt = 0;
+    ll backCost = 0;
+    multiset<ll> back[M];
+    for (ll i = 0; i < a.size(); i++) {
+        d = get<0>(a[i]);
+        f = get<1>(a[i]);
+        t = get<2>(a[i]);
+        c = get<3>(a[i]);
 
     }
 
+    for (ll i = 1; i <= dmax - k + 1; i++) {
+
+    }
+    return 0;
 }
 
