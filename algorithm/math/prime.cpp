@@ -1,5 +1,3 @@
-
-
 // Get a vector with primes
 vector<ll> prime;
 void calcPrime(long long m) {
@@ -16,6 +14,7 @@ void calcPrime(long long m) {
     } 
 }
 
+
 // decompose prime: 
 // The array stores a factor for each number.
 // Use the array to decompose prime factors
@@ -29,4 +28,10 @@ void init()
                 if(!p[j])
                     p[j]=i;
         }
+}
+
+bool isPrime(int x) {
+    for(ll  i = 2; i * i <= x; ++i)
+        if(x % i == 0) return false;
+    return true;
 }
