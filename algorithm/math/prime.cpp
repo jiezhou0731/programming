@@ -1,17 +1,27 @@
 // Get a vector with primes
+const int MM = 3*pow(10,5) + 20;
 vector<ll> prime;
-void calcPrime(long long m) {
-    memset(isNotPrime, 0, sizeof(isNotPrime));
-    for (int i = 2; i <= m; i++) {
+bool isNotPrime[MM + 20];
+void calcPrime() {
+    memset(isNotPrime, false, sizeof(isNotPrime));
+    for (int i = 2; i < MM; i++) {
         if (isNotPrime[i] == false) {
             prime.push_back(i);
             ll x = i + i;
-            while (x <= m) {
+            while (x <= MM) {
                 isNotPrime[x] = true;
                 x+=i;
             }
         }
     } 
+}
+
+
+
+bool isPrime(int x) {
+    for(ll  i = 2; i * i <= x; ++i)
+        if(x % i == 0) return false;
+    return true;
 }
 
 
@@ -30,8 +40,3 @@ void init()
         }
 }
 
-bool isPrime(int x) {
-    for(ll  i = 2; i * i <= x; ++i)
-        if(x % i == 0) return false;
-    return true;
-}

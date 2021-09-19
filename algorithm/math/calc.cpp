@@ -1,5 +1,20 @@
-
-
+// compute (a * b) % mod
+long long mul(long long a, long long b, long long mod) {
+    if (b == 0) return 0;
+    long long t = mul(a, b / 2, mod);
+    t = (t + t) % mod;
+    if (b % 2 == 1) t = (t + a) % mod;
+    return t;
+}
+ 
+// compute (x ^ k) % mod
+long long power(long long x, long long k, long long mod) {
+    if (k == 0) return 1;
+    long long t = power(x, k / 2, mod);
+    t = mul(t, t, mod);
+    if (k % 2 == 1) t = mul(t, x, mod);
+    return t;      
+}
 // C function for extended Euclidean Algorithm 
 long long gcdExtended(long long a, long long b, long long *x, long long *y) 
 { 
@@ -35,3 +50,6 @@ long long modDivide(long long a, long long b, long long m)
     a = a % m; 
     return (a * modInverse(b, m)) % m; 
 } 
+
+
+cout << std::fixed << std::setprecision(6);

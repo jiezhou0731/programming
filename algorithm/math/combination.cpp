@@ -5,7 +5,7 @@ ll C( ll n, ll k )
     if (k * 2 > n) k = n-k;
     if (k == 0) return 1;
  
-    int result = n;
+    ll result = n;
     for( int i = 2; i <= k; ++i ) {
         result = result * (n-i+1) % MOD;  
     }
@@ -78,5 +78,6 @@ int main() {
     fact[0]=1;
     for(ll i=1;i<300005;i++)fact[i]=(fact[i-1]*i)%MOD;
 
+  
 }
 
